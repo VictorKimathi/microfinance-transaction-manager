@@ -1,0 +1,109 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+
+actor "Client (Anonymous)" as Anonymous
+actor "Client (Registered)" as Registered
+actor "Client (Approved)" as Approved
+actor "Admin" as Admin
+actor "System" as System << (S,#ADD1B2) Automated >>
+
+rectangle "Microfinance Transaction Manager" {
+    (Register Account) as UC1
+    (Login) as UC2
+    (Monitor Registration Status) as UC3
+    (View Profile) as UC4
+    (Update Profile) as UC5
+    (Create Deposit) as UC6
+    (Create Withdrawal) as UC7
+    (Request Loan) as UC8
+    (View Loan Status) as UC9
+    (Make Repayment) as UC10
+    (View Account Balance) as UC11
+    (View Mini-Statement) as UC12
+    (View Transaction History) as UC13
+    (Receive Notifications) as UC14
+    (Logout) as UC15
+
+    (View Pending Users) as UC16
+    (Approve User Registration) as UC17
+    (Reject User Registration) as UC18
+    (Suspend User Account) as UC19
+    (Create Account) as UC20
+    (Suspend Account) as UC21
+    (View All Users) as UC22
+    (View All Accounts) as UC23
+    (Approve Loan Request) as UC24
+    (Reject Loan Request) as UC25
+    (Disburse Loan Funds) as UC26
+    (View All Transactions) as UC27
+    (Reverse Transaction) as UC28
+    (Generate Mini-Statement) as UC29
+    (Generate Loan Report) as UC30
+    (View Admin Dashboard) as UC31
+    (Send Notifications) as UC32
+
+    (Send Approval Notification) as UC33
+    (Send Rejection Notification) as UC34
+    (Update Account Balance) as UC35
+    (Calculate Loan Interest) as UC36
+    (Create Repayment Schedule) as UC37
+    (Log Audit Trail) as UC38
+
+    (Create Transaction) as UC_Trans
+
+    UC8 ..> UC11 : <<include>>
+    UC10 ..> UC9 : <<include>>
+    UC26 ..> UC35 : <<include>>
+    UC17 ..> UC32 : <<include>>
+
+    UC7 <.. UC_Trans : <<extend>>
+    UC10 <.. UC_Trans : <<extend>>
+}
+
+Anonymous --> UC1
+Anonymous --> UC2
+
+Registered --> UC3
+Registered --> UC15
+
+Approved --> UC4
+Approved --> UC5
+Approved --> UC6
+Approved --> UC7
+Approved --> UC8
+Approved --> UC9
+Approved --> UC10
+Approved --> UC11
+Approved --> UC12
+Approved --> UC13
+Approved --> UC14
+Approved --> UC15
+
+Admin --> UC16
+Admin --> UC17
+Admin --> UC18
+Admin --> UC19
+Admin --> UC20
+Admin --> UC21
+Admin --> UC22
+Admin --> UC23
+Admin --> UC24
+Admin --> UC25
+Admin --> UC26
+Admin --> UC27
+Admin --> UC28
+Admin --> UC29
+Admin --> UC30
+Admin --> UC31
+Admin --> UC32
+Admin --> UC15
+
+System --> UC33
+System --> UC34
+System --> UC35
+System --> UC36
+System --> UC37
+System --> UC38
+
+@enduml
