@@ -1,6 +1,4 @@
-Here’s a **professional, detailed README** for your **Microfinance Transaction Manager** project. You can drop this directly into your GitHub repository.
 
----
 
 # **Microfinance Transaction Manager**
 
@@ -16,11 +14,10 @@ The **Microfinance Transaction Manager** is a relational database-driven applica
 This project demonstrates:
 
 * Relational database design
-* CRUD operations
-* Indexing and constraints
+* CRUD operations via REST APIs
 * Workflow management (account approval, loan approval)
 * Multi-table joins for reporting
-* Basic web interface or REPL for interactive use
+* Full-stack web interface with **React frontend** and **Spring Boot backend**
 
 The system allows administrators to handle financial operations efficiently, while clients can register, track accounts, request loans, make repayments, and view mini-statements.
 
@@ -69,11 +66,11 @@ This workflow demonstrates **interaction between users, accounts, loans, transac
 
 ### **Tables**
 
-1. **Users** – Stores client information (user_id, name, email, phone, registration_date)
-2. **Accounts** – Tracks user balances and account status (account_id, user_id, balance, account_type, status)
-3. **Transactions** – Logs deposits, withdrawals, and repayments (transaction_id, account_id, type, amount, timestamp)
-4. **Loans** – Stores loan details (loan_id, user_id, amount, interest_rate, start_date, due_date, status)
-5. **Repayments** – Logs payments made toward loans (repayment_id, loan_id, amount, timestamp)
+1. **Users** – Stores client information (`user_id`, `name`, `email`, `phone`, `registration_date`)
+2. **Accounts** – Tracks user balances and account status (`account_id`, `user_id`, `balance`, `account_type`, `status`)
+3. **Transactions** – Logs deposits, withdrawals, and repayments (`transaction_id`, `account_id`, `type`, `amount`, `timestamp`)
+4. **Loans** – Stores loan details (`loan_id`, `user_id`, `amount`, `interest_rate`, `start_date`, `due_date`, `status`)
+5. **Repayments** – Logs payments made toward loans (`repayment_id`, `loan_id`, `amount`, `timestamp`)
 
 ### **Relationships**
 
@@ -84,13 +81,19 @@ This workflow demonstrates **interaction between users, accounts, loans, transac
 
 ## **Interface**
 
-* **Client Dashboard**: View account status, loan requests, transactions, and mini-statements
-* **Registration Form**: Users sign up for accounts
-* **Loan Request Form**: Users apply for loans
-* **Transactions Page**: Track deposits, withdrawals, and repayments
-* **Admin Dashboard**: Approve accounts and loans, manage users and accounts, generate reports
+* **React Frontend**:
 
-*Implementation can be in a simple web interface (React/Flask) or a command-line interactive interface (REPL).*
+  * Client Dashboard – View account status, loan requests, transactions, and mini-statements
+  * Registration Form – Users sign up for accounts
+  * Loan Request Form – Users apply for loans
+  * Transactions Page – Track deposits, withdrawals, and repayments
+  * Admin Dashboard – Approve accounts and loans, manage users and accounts, generate reports
+
+* **Spring Boot Backend**:
+
+  * REST API endpoints for CRUD operations
+  * Database integration (PostgreSQL/MySQL)
+  * Business logic for workflows and transactions
 
 ---
 
@@ -98,8 +101,10 @@ This workflow demonstrates **interaction between users, accounts, loans, transac
 
 ### **Prerequisites**
 
-* Python 3.10+ or Node.js (depending on implementation)
-* SQLite/MySQL/PostgreSQL for the database
+* Java 17+ / JDK installed
+* Maven or Gradle for backend
+* Node.js 18+ and npm/yarn for frontend
+* PostgreSQL/MySQL for the database
 * Git
 
 ### **Installation**
@@ -110,57 +115,84 @@ This workflow demonstrates **interaction between users, accounts, loans, transac
 git clone https://github.com/VictorKimathi/microfinance-transaction-manager.git
 ```
 
-2. Navigate to project folder:
+2. Navigate to backend and frontend folders:
 
 ```bash
-cd microfinance-transaction-manager
+cd microfinance-transaction-manager/backend
+cd ../frontend
 ```
 
-3. Install dependencies (example for Python Flask):
+3. **Backend Setup (Spring Boot):**
 
 ```bash
-pip install -r requirements.txt
+# Navigate to backend folder
+cd backend
+
+# Build project
+mvn clean install  # or ./gradlew build
+
+# Run Spring Boot server
+mvn spring-boot:run  # or ./gradlew bootRun
 ```
 
-4. Run database migrations / create tables using provided SQL scripts
-5. Start the application:
+4. **Frontend Setup (React):**
 
 ```bash
-python app.py
+# Navigate to frontend folder
+cd ../frontend
+
+# Install dependencies
+npm install  # or yarn install
+
+# Start frontend development server
+npm start  # or yarn start
 ```
 
 ---
 
 ## **Usage**
 
-1. **Register a new client** via the registration form
+1. **Register a new client** via React registration form
 2. **Admin approves account** via Admin Dashboard
 3. **Client requests loan**, admin approves
 4. **Log transactions** for purchases or repayments
 5. **Generate mini-statement** to view activity
 
+All client actions interact with the **Spring Boot REST API**, which handles database operations and business logic.
+
 ---
 
-## **Sample Queries**
+## **Sample Backend API Endpoints**
 
-* **View account mini-statement:**
+* **Get account mini-statement:**
 
-```sql
-SELECT t.timestamp, t.type, t.amount, a.balance
-FROM Transactions t
-JOIN Accounts a ON t.account_id = a.account_id
-WHERE a.user_id = 1
-ORDER BY t.timestamp DESC;
+```http
+GET /api/accounts/{userId}/transactions
 ```
 
-* **Get loan balance for a user:**
+* **Request a loan:**
 
-```sql
-SELECT l.amount - SUM(r.amount) AS balance
-FROM Loans l
-LEFT JOIN Repayments r ON l.loan_id = r.loan_id
-WHERE l.user_id = 1
-GROUP BY l.loan_id;
+```http
+POST /api/loans
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "amount": 100,
+  "interestRate": 0.05
+}
+```
+
+* **Make repayment:**
+
+```http
+POST /api/repayments
+Content-Type: application/json
+
+{
+  "loanId": 1,
+  "amount": 50
+}
 ```
 
 ---
@@ -170,8 +202,8 @@ GROUP BY l.loan_id;
 Contributions are welcome! Please create a pull request for improvements such as:
 
 * Adding new features (e.g., notifications via email/SMS)
-* Improving the web interface
-* Adding test scripts or data validation
+* Improving React frontend UI/UX
+* Adding unit/integration tests for Spring Boot backend
 
 ---
 
@@ -183,4 +215,6 @@ MIT License – free to use and modify
 
 ## **Contact**
 
-Victor Kimathi – [victorcodes9532@gmail.com] | [https://www.linkedin.com/in/victor-kimathi-517501267/] | [https://github.com/VictorKimathi]
+Victor Kimathi – [victorcodes9532@gmail.com](mailto:victorcodes9532@gmail.com) | [LinkedIn](https://www.linkedin.com/in/victor-kimathi-517501267/) | [GitHub](https://github.com/VictorKimathi)
+
+
