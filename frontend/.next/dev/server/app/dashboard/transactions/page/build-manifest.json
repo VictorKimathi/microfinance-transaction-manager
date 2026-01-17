@@ -1,0 +1,22 @@
+{
+  "devFiles": [],
+  "ampDevFiles": [],
+  "polyfillFiles": [
+    "static/chunks/3d35a_next_dist_build_polyfills_polyfill-nomodule.js"
+  ],
+  "lowPriorityFiles": [],
+  "rootMainFiles": [
+    "static/chunks/[turbopack]_browser_dev_hmr-client_hmr-client_ts_5e661605._.js",
+    "static/chunks/3d35a_next_dist_compiled_react-dom_2e5ad51d._.js",
+    "static/chunks/3d35a_next_dist_compiled_react-server-dom-turbopack_0e628874._.js",
+    "static/chunks/3d35a_next_dist_compiled_next-devtools_index_b75cce2d.js",
+    "static/chunks/3d35a_next_dist_compiled_8b93cd9f._.js",
+    "static/chunks/3d35a_next_dist_client_6f441af7._.js",
+    "static/chunks/3d35a_next_dist_65d7b836._.js",
+    "static/chunks/3d35a_@swc_helpers_cjs_35147c7e._.js",
+    "static/chunks/microfinancemanagerfrontend_a0ff3932._.js",
+    "static/chunks/turbopack-microfinancemanagerfrontend_591f3b5d._.js"
+  ],
+  "pages": {},
+  "ampFirstPages": []
+}

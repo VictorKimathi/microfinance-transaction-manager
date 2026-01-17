@@ -1,0 +1,14 @@
+{
+  "/admin/approvals/page": "app/admin/approvals/page.js",
+  "/admin/page": "app/admin/page.js",
+  "/admin/reports/page": "app/admin/reports/page.js",
+  "/admin/settings/page": "app/admin/settings/page.js",
+  "/admin/users/page": "app/admin/users/page.js",
+  "/auth/login/page": "app/auth/login/page.js",
+  "/auth/register/page": "app/auth/register/page.js",
+  "/dashboard/loans/page": "app/dashboard/loans/page.js",
+  "/dashboard/page": "app/dashboard/page.js",
+  "/dashboard/statements/page": "app/dashboard/statements/page.js",
+  "/dashboard/transactions/page": "app/dashboard/transactions/page.js",
+  "/page": "app/page.js"
+}
